@@ -70,3 +70,18 @@ document.addEventListener('scroll', () => {
       behavior: 'smooth'
     });
   }
+
+  // Fonction pour gérer l'affichage du bouton
+  const scrollTopBtn = window.document.querySelector(".scrollTopBtn");
+
+  window.addEventListener("scroll", function () {
+      if (window.scrollY > 200) {
+          scrollTopBtn.style.display = "flex";
+      } else {
+          scrollTopBtn.style.display = "none";
+      }
+  });
+
+  scrollTopBtn.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+  });

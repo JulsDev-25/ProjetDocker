@@ -17,8 +17,8 @@
         }
 
         * {
-            margin: 0;
             padding: 0;
+            margin: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
@@ -28,6 +28,7 @@
             color: var(--dark);
             line-height: 1.7;
             scroll-behavior: smooth;
+            position: relative;
         }
 
         .hero {
@@ -225,11 +226,40 @@
             text-decoration: none;
             font-weight: bold;
             transition: background-color 0.3s ease;
+            cursor: pointer;
         }
+
+        .scrollTopBtn {
+            z-index: 900;
+            position: fixed;
+            bottom: 0px;
+            right: 20px;
+            height: 40px;
+            width: 40px;
+            border: none;
+            box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.4);
+            bottom: 100px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            transition: 0.2s ease;
+            margin: auto;
+            padding: auto;
+        }
+
+        .scrollTopBtn:hover {
+            transform: scale(1.1);
+        }
+
 
         .portfolio-btn:hover {
             background-color: #d61e65;
         }
+
+
 
         footer {
             background: var(--dark);
@@ -294,6 +324,10 @@
                 NGINX.</p>
         </div>
     </section>
+
+    <div class="scrollTopBtn">
+        <i class="fa-solid fa-arrow-up"></i>
+    </div>
 
     <div class="container">
         <!-- Accueil -->
@@ -423,7 +457,8 @@
                 site statique.</p>
             <p style="margin-top: 20px;">Dans le dossier où se trouve notre site web, à racine, on crée un fichier
                 <strong>Dockerfile</strong> sans extension et à l'intérieur de ce fichier un saisir les lignes de code
-                suivantes :</p>
+                suivantes :
+            </p>
             <div class="code-block">
                 <span class="code-comment"># Dockerfile</span><br>
                 FROM nginx:alpine<br>
@@ -485,13 +520,14 @@
     </footer>
 
     <script>
+        // Rendre la barre de navigation fixe après le scroll
         window.addEventListener("scroll", function () {
             const nav = window.document.querySelector("nav")
             if (window.scrollY > 280) {
                 nav.style.position = "fixed";
                 nav.style.top = "0px";
                 nav.style.width = "100%";
-                nav.style.boxShadow ="0 10px 22px rgba(0, 0, 0, 0.4)"
+                nav.style.boxShadow = "0 10px 22px rgba(0, 0, 0, 0.4)"
             } else {
                 nav.style.position = "relative";
                 nav.style.top = "auto";
@@ -499,6 +535,21 @@
                 nav.style.boxShadow = "none"
             }
         })
+
+        // Fonction pour gérer l'affichage du bouton
+        const scrollTopBtn = window.document.querySelector(".scrollTopBtn");
+
+        window.addEventListener("scroll", function () {
+            if (window.scrollY > 200) {
+                scrollTopBtn.style.display = "flex";
+            } else {
+                scrollTopBtn.style.display = "none";
+            }
+        });
+
+        scrollTopBtn.addEventListener("click", function () {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
     </script>
 </body>
 
